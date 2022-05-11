@@ -4,13 +4,15 @@ const morgan = require('morgan');
 
 const server = express();
 
+const usersRouter = require('./users/users-router');
+
 // remember express by default cannot parse JSON in request bodies
 server.use(express.json());
-server.use(helmet);
+server.use(helmet());
 server.use(morgan('dev'));
 
 // global middlewares and the user's router need to be connected here
-// server.use('/api/users', usersRouter);
+server.use('/api/users', usersRouter);
 
 
 server.get('/', (req, res) => {
